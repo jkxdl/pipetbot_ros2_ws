@@ -1,0 +1,5 @@
+int32 expected_circle_count
+---
+CirclePosition[] circles
+---
+string status

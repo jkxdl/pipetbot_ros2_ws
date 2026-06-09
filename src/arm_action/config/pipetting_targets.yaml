@@ -1,0 +1,16 @@
+/**:
+  ros__parameters:
+    gpio_combination_id_final: 1
+
+    observe_correction_z: 0.41
+
+    test_tube_rack_correction_x: -0.16
+    test_tube_rack_correction_y: -0.1
+
+    cup_work_correction_x: -0.14
+    cup_work_correction_y: 0.1
+    cup_work_correction_z: 0.24
+
+    circle_work_correction_x: -0.112
+    circle_work_correction_y: 0.003
+    circle_work_correction_z: 0.228

@@ -1,0 +1,10 @@
+bool is_running
+string phase
+int32 current_tube_index
+int32 total_tubes
+int32 completed_tubes
+int32 current_step
+int32 total_steps
+float32 progress
+string message
+string last_error

@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+    <!-- 地面 -->
+    <include><uri>model://ground_plane</uri></include>
+    <!-- 太阳（光源+天空盒） -->
+    <include><uri>model://sun</uri></include>
+    <!-- 物理 & 重力 -->
+    <physics type="ode" name="default_physics">
+      <gravity>0 0 -9.8</gravity>
+    </physics>
+    <!-- 渲染场景 -->
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+    </scene>
+    <!-- （可选）自定义摄像机，注释掉试试默认视角 -->
+    <!--
+    <gui fullscreen="0">
+      <camera name="user_camera">
+        <pose>4.9 -4.4 3.7 0 0.28 2.36</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+    -->
+  </world>
+</sdf>
+

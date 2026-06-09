@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Pipetting Robot Operator
+Comment=Launch the pipetting robot operator workspace
+Exec=bash -lc "/home/robot/pipetbot_ros2_ws/src/pipettingrobot_gui/scripts/launch_pipetting_operator.sh"
+Icon=applications-science
+Terminal=true
+Categories=Science;Robotics;

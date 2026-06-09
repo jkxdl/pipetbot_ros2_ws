@@ -1,0 +1,1903 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <gravity>0 0 -9.8</gravity>
+    </physics>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='table'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='surface'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.5 0.8 0.03</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.6</mu>
+                <mu2>0.6</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual1'>
+          <pose>0 0 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.5 0.8 0.03</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Wood</name>
+            </script>
+          </material>
+        </visual>
+        <collision name='front_left_leg'>
+          <pose>0.68 0.38 0.5 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='front_left_leg'>
+          <pose>0.68 0.38 0.5 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <collision name='front_right_leg'>
+          <pose>0.68 -0.38 0.5 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='front_right_leg'>
+          <pose>0.68 -0.38 0.5 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <collision name='back_right_leg'>
+          <pose>-0.68 -0.38 0.5 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='back_right_leg'>
+          <pose>-0.68 -0.38 0.5 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <collision name='back_left_leg'>
+          <pose>-0.68 0.38 0.5 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='back_left_leg'>
+          <pose>-0.68 0.38 0.5 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.6 0 0 0 -0 1.5708</pose>
+    </model>
+    <model name='tube_2_25cm'>
+      <link name='link'>
+        <pose>0 0 0.05725 0 -0 0</pose>
+        <inertial>
+          <mass>0.0354</mass>
+          <inertia>
+            <ixx>4.11781e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.11781e-05</iyy>
+            <iyz>0</iyz>
+            <izz>5.00578e-06</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.305</poissons_ratio>
+              <elastic_modulus>2e+11</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.4 -0.3 0.85 0 -0 0</pose>
+    </model>
+    <model name='plastic_cup'>
+      <link name='link'>
+        <pose>0 0 0.065 0 -0 0</pose>
+        <inertial>
+          <mass>0.0599</mass>
+          <inertia>
+            <ixx>0.000302896</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000302896</iyy>
+            <iyz>0</iyz>
+            <izz>3.28764e-05</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://plastic_cup/meshes/plastic_cup.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.35</poissons_ratio>
+              <elastic_modulus>3.10264e+09</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://plastic_cup/meshes/plastic_cup.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/GreyTransparent</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0 0.8 0.85 0 -0 0</pose>
+    </model>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>0</shadows>
+    </scene>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <audio>
+      <device>default</device>
+    </audio>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='pipetting_robot'>
+      <joint name='world_joint' type='fixed'>
+        <pose relative_to='__model__'>0 0 0.85 0 -0 0</pose>
+        <parent>world</parent>
+        <child>base_link</child>
+      </joint>
+      <link name='base_link'>
+        <pose relative_to='world_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0.000129 0.001249 0.016678 0 -0 0</pose>
+          <mass>1.53902</mass>
+          <inertia>
+            <ixx>0.003278</ixx>
+            <ixy>-1e-06</ixy>
+            <ixz>-1e-06</ixz>
+            <iyy>0.003017</iyy>
+            <iyz>-4.8e-05</iyz>
+            <izz>0.005841</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link0.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='base_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link0.DAE</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='shoulder_joint' type='revolute'>
+        <pose relative_to='base_link'>0 0 0.122 0 -0 3.14159</pose>
+        <parent>base_link</parent>
+        <child>shoulder_Link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>500</effort>
+            <velocity>2.5964</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='shoulder_Link'>
+        <pose relative_to='shoulder_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-1e-05 0.001807 -0.013854 0 -0 0</pose>
+          <mass>4.84858</mass>
+          <inertia>
+            <ixx>0.011842</ixx>
+            <ixy>0</ixy>
+            <ixz>4e-06</ixz>
+            <iyy>0.0118</iyy>
+            <iyz>-0.000103</iyz>
+            <izz>0.008103</izz>
+          </inertia>
+        </inertial>
+        <collision name='shoulder_Link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link1.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='shoulder_Link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link1.DAE</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='upperArm_joint' type='revolute'>
+        <pose relative_to='shoulder_Link'>0 0.1215 0 1.57079 -1.57079 3.14159</pose>
+        <parent>shoulder_Link</parent>
+        <child>upperArm_Link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>133</effort>
+            <velocity>2.5964</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='upperArm_Link'>
+        <pose relative_to='upperArm_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0.204 0 0.006603 0 -0 0</pose>
+          <mass>10.8363</mass>
+          <inertia>
+            <ixx>0.026024</ixx>
+            <ixy>2e-05</ixy>
+            <ixz>0</ixz>
+            <iyy>0.432805</iyy>
+            <iyz>0</iyz>
+            <izz>0.425155</izz>
+          </inertia>
+        </inertial>
+        <collision name='upperArm_Link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link2.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='upperArm_Link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link2.DAE</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='foreArm_joint' type='revolute'>
+        <pose relative_to='upperArm_Link'>0.408 0 0 -3.14159 0 0</pose>
+        <parent>upperArm_Link</parent>
+        <child>foreArm_Link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>133</effort>
+            <velocity>2.5964</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='foreArm_Link'>
+        <pose relative_to='foreArm_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0.264626 -2e-05 0.093611 0 -0 0</pose>
+          <mass>2.84917</mass>
+          <inertia>
+            <ixx>0.003634</ixx>
+            <ixy>7e-06</ixy>
+            <ixz>0.000168</ixz>
+            <iyy>0.065327</iyy>
+            <iyz>2e-06</iyz>
+            <izz>0.064676</izz>
+          </inertia>
+        </inertial>
+        <collision name='foreArm_Link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link3.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='foreArm_Link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link3.DAE</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='wrist1_joint' type='revolute'>
+        <pose relative_to='foreArm_Link'>0.376 0 0 3.14159 -0 1.5708</pose>
+        <parent>foreArm_Link</parent>
+        <child>wrist1_Link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>13.5</effort>
+            <velocity>3.1105</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='wrist1_Link'>
+        <pose relative_to='wrist1_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>3.8e-05 0.011278 -0.001539 0 -0 0</pose>
+          <mass>1.62802</mass>
+          <inertia>
+            <ixx>0.001951</ixx>
+            <ixy>3e-06</ixy>
+            <ixz>1e-06</ixz>
+            <iyy>0.001154</iyy>
+            <iyz>-4.2e-05</iyz>
+            <izz>0.001931</izz>
+          </inertia>
+        </inertial>
+        <collision name='wrist1_Link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link4.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wrist1_Link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link4.DAE</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='wrist2_joint' type='revolute'>
+        <pose relative_to='wrist1_Link'>0 0.1025 0 -1.5708 0 0</pose>
+        <parent>wrist1_Link</parent>
+        <child>wrist2_Link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>13.5</effort>
+            <velocity>3.1105</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='wrist2_Link'>
+        <pose relative_to='wrist2_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-3.8e-05 -0.011278 -0.001539 0 -0 0</pose>
+          <mass>1.62802</mass>
+          <inertia>
+            <ixx>0.001951</ixx>
+            <ixy>3e-06</ixy>
+            <ixz>-1e-06</ixz>
+            <iyy>0.001154</iyy>
+            <iyz>4.2e-05</iyz>
+            <izz>0.001931</izz>
+          </inertia>
+        </inertial>
+        <collision name='wrist2_Link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link5.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wrist2_Link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link5.DAE</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='wrist3_joint' type='revolute'>
+        <pose relative_to='wrist2_Link'>0 -0.094 0 1.5708 -0 0</pose>
+        <parent>wrist2_Link</parent>
+        <child>wrist3_Link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-6.28319</lower>
+            <upper>6.28319</upper>
+            <effort>13.5</effort>
+            <velocity>3.1105</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='wrist3_Link'>
+        <pose relative_to='wrist3_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>6e-06 -0.169936 0.071111 0 -0 0</pose>
+          <mass>0.6978</mass>
+          <inertia>
+            <ixx>0.0102933</ixx>
+            <ixy>-7.42104e-07</ixy>
+            <ixz>3.83777e-07</ixz>
+            <iyy>0.00225908</iyy>
+            <iyz>0.00415277</iyz>
+            <izz>0.00821222</izz>
+          </inertia>
+        </inertial>
+        <collision name='wrist3_Link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link6.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='wrist3_Link_fixed_joint_lump__tool0_collision_1'>
+          <pose>0 -0.2374 0.106 1.5708 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/thirdparts/pipettor_link.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wrist3_Link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link6.DAE</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='wrist3_Link_fixed_joint_lump__tool0_visual_1'>
+          <pose>0 -0.2374 0.106 1.5708 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/thirdparts/pipettor_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <static>0</static>
+      <plugin name='gazebo_ros2_control' filename='libgazebo_ros2_control.so'>
+        <parameters>/home/robot/aubo_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/config/ros2_controllers.yaml</parameters>
+      </plugin>
+      <pose>0 0 0.05 0 -0 0</pose>
+    </model>
+    <model name='plastic_cup_clone'>
+      <link name='link'>
+        <pose>0 0 0.065 0 -0 0</pose>
+        <inertial>
+          <mass>0.0599</mass>
+          <inertia>
+            <ixx>0.000302896</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000302896</iyy>
+            <iyz>0</iyz>
+            <izz>3.28764e-05</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://plastic_cup/meshes/plastic_cup.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.35</poissons_ratio>
+              <elastic_modulus>3.10264e+09</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://plastic_cup/meshes/plastic_cup.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/GreyTransparent</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.718821 -0.567005 1.02164 4.2e-05 -2e-05 1.36052</pose>
+    </model>
+    <model name='plastic_cup_clone_0'>
+      <link name='link'>
+        <pose>0 0 0.065 0 -0 0</pose>
+        <inertial>
+          <mass>0.0599</mass>
+          <inertia>
+            <ixx>0.000302896</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000302896</iyy>
+            <iyz>0</iyz>
+            <izz>3.28764e-05</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://plastic_cup/meshes/plastic_cup.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.35</poissons_ratio>
+              <elastic_modulus>3.10264e+09</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://plastic_cup/meshes/plastic_cup.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/GreyTransparent</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.735539 -0.291757 1.02164 4.3e-05 -2.1e-05 1.36051</pose>
+    </model>
+    <model name='tube_2_25cm_clone'>
+      <link name='link'>
+        <pose>0 0 0.05725 0 -0 0</pose>
+        <inertial>
+          <mass>0.0354</mass>
+          <inertia>
+            <ixx>4.11781e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.11781e-05</iyy>
+            <iyz>0</iyz>
+            <izz>5.00578e-06</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.305</poissons_ratio>
+              <elastic_modulus>2e+11</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.705751 0.191721 1.014 2.2e-05 -2.9e-05 2.6693</pose>
+    </model>
+    <model name='tube_2_25cm_clone_0'>
+      <link name='link'>
+        <pose>0 0 0.05725 0 -0 0</pose>
+        <inertial>
+          <mass>0.0354</mass>
+          <inertia>
+            <ixx>4.11781e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.11781e-05</iyy>
+            <iyz>0</iyz>
+            <izz>5.00578e-06</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.305</poissons_ratio>
+              <elastic_modulus>2e+11</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.645746 0.191512 1.014 1.9e-05 -3.1e-05 2.66929</pose>
+    </model>
+    <model name='tube_2_25cm_clone_1'>
+      <link name='link'>
+        <pose>0 0 0.05725 0 -0 0</pose>
+        <inertial>
+          <mass>0.0354</mass>
+          <inertia>
+            <ixx>4.11781e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.11781e-05</iyy>
+            <iyz>0</iyz>
+            <izz>5.00578e-06</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.305</poissons_ratio>
+              <elastic_modulus>2e+11</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.639543 0.239045 1.014 9e-06 -3.6e-05 2.66929</pose>
+    </model>
+    <model name='tube_2_25cm_clone_2'>
+      <link name='link'>
+        <pose>0 0 0.05725 0 -0 0</pose>
+        <inertial>
+          <mass>0.0354</mass>
+          <inertia>
+            <ixx>4.11781e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.11781e-05</iyy>
+            <iyz>0</iyz>
+            <izz>5.00578e-06</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.305</poissons_ratio>
+              <elastic_modulus>2e+11</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.646454 0.294533 1.014 1.5e-05 -3.3e-05 2.66928</pose>
+    </model>
+    <model name='tube_2_25cm_clone_3'>
+      <link name='link'>
+        <pose>0 0 0.05725 0 -0 0</pose>
+        <inertial>
+          <mass>0.0354</mass>
+          <inertia>
+            <ixx>4.11781e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.11781e-05</iyy>
+            <iyz>0</iyz>
+            <izz>5.00578e-06</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.305</poissons_ratio>
+              <elastic_modulus>2e+11</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.717234 0.292592 1.014 2e-05 -3e-05 2.66928</pose>
+    </model>
+    <model name='tube_2_25cm_clone_4'>
+      <link name='link'>
+        <pose>0 0 0.05725 0 -0 0</pose>
+        <inertial>
+          <mass>0.0354</mass>
+          <inertia>
+            <ixx>4.11781e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.11781e-05</iyy>
+            <iyz>0</iyz>
+            <izz>5.00578e-06</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.305</poissons_ratio>
+              <elastic_modulus>2e+11</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.644535 0.350026 1.014 2.1e-05 -3e-05 2.66927</pose>
+    </model>
+    <model name='tube_2_25cm_clone_5'>
+      <link name='link'>
+        <pose>0 0 0.05725 0 -0 0</pose>
+        <inertial>
+          <mass>0.0354</mass>
+          <inertia>
+            <ixx>4.11781e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.11781e-05</iyy>
+            <iyz>0</iyz>
+            <izz>5.00578e-06</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.305</poissons_ratio>
+              <elastic_modulus>2e+11</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.715493 0.356861 1.014 2.1e-05 -3e-05 2.66927</pose>
+    </model>
+    <model name='tube_2_25cm_clone_6'>
+      <link name='link'>
+        <pose>0 0 0.05725 0 -0 0</pose>
+        <inertial>
+          <mass>0.0354</mass>
+          <inertia>
+            <ixx>4.11781e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.11781e-05</iyy>
+            <iyz>0</iyz>
+            <izz>5.00578e-06</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.305</poissons_ratio>
+              <elastic_modulus>2e+11</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.559597 0.194574 1.014 2.1e-05 -3e-05 2.66927</pose>
+    </model>
+    <model name='tube_2_25cm_clone_7'>
+      <link name='link'>
+        <pose>0 0 0.05725 0 -0 0</pose>
+        <inertial>
+          <mass>0.0354</mass>
+          <inertia>
+            <ixx>4.11781e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.11781e-05</iyy>
+            <iyz>0</iyz>
+            <izz>5.00578e-06</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.305</poissons_ratio>
+              <elastic_modulus>2e+11</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.5403 0.252445 1.014 2e-05 -3e-05 2.66926</pose>
+    </model>
+    <model name='tube_2_25cm_clone_8'>
+      <link name='link'>
+        <pose>0 0 0.05725 0 -0 0</pose>
+        <inertial>
+          <mass>0.0354</mass>
+          <inertia>
+            <ixx>4.11781e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.11781e-05</iyy>
+            <iyz>0</iyz>
+            <izz>5.00578e-06</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.305</poissons_ratio>
+              <elastic_modulus>2e+11</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.535897 0.313416 1.014 1.8e-05 -3.1e-05 2.66926</pose>
+    </model>
+    <model name='tube_2_25cm_clone_9'>
+      <link name='link'>
+        <pose>0 0 0.05725 0 -0 0</pose>
+        <inertial>
+          <mass>0.0354</mass>
+          <inertia>
+            <ixx>4.11781e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.11781e-05</iyy>
+            <iyz>0</iyz>
+            <izz>5.00578e-06</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <poissons_ratio>0.305</poissons_ratio>
+              <elastic_modulus>2e+11</elastic_modulus>
+              <ode>
+                <kp>100000</kp>
+                <kd>100</kd>
+                <max_vel>100</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <friction>
+              <torsional>
+                <coefficient>1</coefficient>
+                <use_patch_radius>0</use_patch_radius>
+                <surface_radius>0.01</surface_radius>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://tube_2_25cm/meshes/tube_2_25.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.566691 0.396398 1.014 1.8e-05 -3.1e-05 2.66926</pose>
+    </model>
+    <state world_name='default'>
+      <sim_time>346 783000000</sim_time>
+      <real_time>347 384312001</real_time>
+      <wall_time>1745310267 960473982</wall_time>
+      <iterations>346783</iterations>
+      <model name='ground_plane'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='pipetting_robot'>
+        <pose>-0 -6.6e-05 0.050001 -7.6e-05 0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='base_link'>
+          <pose>-0 -1e-06 0.900001 -7.6e-05 0 0</pose>
+          <velocity>-0 -0 0 -0 -0 -0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+        <link name='foreArm_Link'>
+          <pose>4e-06 -0.121589 1.42998 0.017979 -1.57056 -1.58879</pose>
+          <velocity>1e-06 -0 -0 -0 -4e-06 -3e-06</velocity>
+          <acceleration>-0.000345 0 -0 -2e-06 -0.004227 -0.04938</acceleration>
+          <wrench>-0.000984 0 -0 0 -0 0</wrench>
+        </link>
+        <link name='shoulder_Link'>
+          <pose>0 8e-06 1.022 -0.000159 0 3.14158</pose>
+          <velocity>0 0 -0 0 0 -3e-06</velocity>
+          <acceleration>-5e-06 -0 -0 -2e-06 4.9e-05 -0.002786</acceleration>
+          <wrench>-2.4e-05 -0 -0 0 -0 0</wrench>
+        </link>
+        <link name='upperArm_Link'>
+          <pose>-1e-06 -0.121492 1.02198 3.09096 -1.57056 -1.52018</pose>
+          <velocity>-0 0 -0 0 2e-06 -3e-06</velocity>
+          <acceleration>8.1e-05 -0 -0 -3e-06 0.002198 -0.045504</acceleration>
+          <wrench>0.000883 -0 -0 0 -0 0</wrench>
+        </link>
+        <link name='wrist1_Link'>
+          <pose>2e-06 -0.121677 1.80598 1.57102 4.2e-05 -1.6e-05</pose>
+          <velocity>-1e-06 0 -0 0 1.5e-05 -3e-06</velocity>
+          <acceleration>-0.000911 -0 -1e-06 3.6e-05 0.009316 -0.005552</acceleration>
+          <wrench>-0.001483 -0 -1e-06 0 -0 0</wrench>
+        </link>
+        <link name='wrist2_Link'>
+          <pose>6e-06 -0.121701 1.90848 0.000245 4.2e-05 2e-05</pose>
+          <velocity>0 -0 -0 0 1.5e-05 1e-05</velocity>
+          <acceleration>0.000565 -0 0 1e-06 0.015282 0.009687</acceleration>
+          <wrench>0.000919 -1e-06 1e-06 0 -0 0</wrench>
+        </link>
+        <link name='wrist3_Link'>
+          <pose>8e-06 -0.215701 1.90845 1.57106 3.9e-05 2e-05</pose>
+          <velocity>1e-06 -0 -0 0 1e-05 1e-05</velocity>
+          <acceleration>0.000389 0 -0 0.000115 0.492001 0.958485</acceleration>
+          <wrench>0.000271 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plastic_cup'>
+        <pose>0.456803 -0.363931 1.02164 3.8e-05 -2.8e-05 1.36041</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.456805 -0.363934 1.08665 3.8e-05 -2.8e-05 1.36041</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.157804 -0.131606 -0.002822 -1.31114 -0.954518 3.11774</acceleration>
+          <wrench>-0.009452 -0.007883 -0.000169 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plastic_cup_clone'>
+        <pose>0.718825 -0.567003 1.02164 4.1e-05 -2.2e-05 1.36041</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.718827 -0.567005 1.08665 4.1e-05 -2.2e-05 1.36041</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.189566 0.073149 -0.011922 2.13318 0.524968 -3.12091</acceleration>
+          <wrench>0.011355 0.004382 -0.000714 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='plastic_cup_clone_0'>
+        <pose>0.735543 -0.291755 1.02164 3.9e-05 -2.7e-05 1.36041</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.735545 -0.291758 1.08665 3.9e-05 -2.7e-05 1.36041</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.163475 -0.125269 0.001928 -1.40527 -0.875253 3.11633</acceleration>
+          <wrench>-0.009792 -0.007504 0.000116 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='table'>
+        <pose>0.6 0 0 0 -0 1.5708</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.6 0 0 0 -0 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='tube_2_25cm'>
+        <pose>0.705639 0.239135 1.014 2.1e-05 -3e-05 2.66925</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.705642 0.239135 1.07125 2.1e-05 -3e-05 2.66925</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.01255 0.14191 0.000885 -2.49919 -0.220706 0.003997</acceleration>
+          <wrench>-0.000444 0.005024 3.1e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='tube_2_25cm_clone'>
+        <pose>0.705751 0.191722 1.014 2.7e-05 -2.6e-05 2.66923</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.705753 0.191723 1.07125 2.7e-05 -2.6e-05 2.66923</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.015422 0.11085 -0.002197 -1.95122 0.271722 0.00791</acceleration>
+          <wrench>0.000546 0.003924 -7.8e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='tube_2_25cm_clone_0'>
+        <pose>0.645746 0.191513 1.014 2.1e-05 -3e-05 2.66925</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.645748 0.191513 1.07125 2.1e-05 -3e-05 2.66925</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.012549 0.14191 0.000885 -2.49919 -0.22069 0.003997</acceleration>
+          <wrench>-0.000444 0.005024 3.1e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='tube_2_25cm_clone_1'>
+        <pose>0.639543 0.239046 1.014 2.1e-05 -3e-05 2.66925</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.639545 0.239046 1.07125 2.1e-05 -3e-05 2.66925</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.01255 0.14191 0.000885 -2.49919 -0.220706 0.003997</acceleration>
+          <wrench>-0.000444 0.005024 3.1e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='tube_2_25cm_clone_2'>
+        <pose>0.646454 0.294534 1.014 2.1e-05 -3e-05 2.66925</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.646456 0.294534 1.07125 2.1e-05 -3e-05 2.66925</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.012549 0.14191 0.000885 -2.49919 -0.22069 0.003997</acceleration>
+          <wrench>-0.000444 0.005024 3.1e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='tube_2_25cm_clone_3'>
+        <pose>0.717234 0.292593 1.014 2.1e-05 -3e-05 2.66925</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.717236 0.292593 1.07125 2.1e-05 -3e-05 2.66925</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.012549 0.14191 0.000885 -2.49919 -0.220689 0.003997</acceleration>
+          <wrench>-0.000444 0.005024 3.1e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='tube_2_25cm_clone_4'>
+        <pose>0.644535 0.350026 1.014 2.1e-05 -3e-05 2.66925</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.644537 0.350027 1.07125 2.1e-05 -3e-05 2.66925</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.012549 0.14191 0.000885 -2.49919 -0.220696 0.003997</acceleration>
+          <wrench>-0.000444 0.005024 3.1e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='tube_2_25cm_clone_5'>
+        <pose>0.715493 0.356861 1.014 2.1e-05 -3e-05 2.66925</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.715495 0.356862 1.07125 2.1e-05 -3e-05 2.66925</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.01255 0.14191 0.000885 -2.49919 -0.220705 0.003997</acceleration>
+          <wrench>-0.000444 0.005024 3.1e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='tube_2_25cm_clone_6'>
+        <pose>0.559597 0.194574 1.014 2.1e-05 -3e-05 2.66926</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.559599 0.194575 1.07125 2.1e-05 -3e-05 2.66926</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.01255 0.14191 0.000885 -2.49919 -0.220715 0.003997</acceleration>
+          <wrench>-0.000444 0.005024 3.1e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='tube_2_25cm_clone_7'>
+        <pose>0.5403 0.252445 1.014 2.4e-05 -2.8e-05 2.66924</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.540302 0.252446 1.07125 2.4e-05 -2.8e-05 2.66924</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.015627 0.114228 -0.00207 -2.01069 0.275333 0.008124</acceleration>
+          <wrench>0.000553 0.004044 -7.3e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='tube_2_25cm_clone_8'>
+        <pose>0.535897 0.313416 1.014 2e-05 -3.1e-05 2.66925</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.535899 0.313416 1.07125 2e-05 -3.1e-05 2.66925</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.029582 -0.141107 -0.002072 2.48862 0.52183 -0.021157</acceleration>
+          <wrench>0.001047 -0.004995 -7.3e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='tube_2_25cm_clone_9'>
+        <pose>0.566691 0.396398 1.014 2e-05 -3e-05 2.66926</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.566693 0.396398 1.07125 2e-05 -3e-05 2.66926</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.020495 -0.148184 0.000368 2.6181 0.362315 -0.019529</acceleration>
+          <wrench>0.000726 -0.005246 1.3e-05 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>1.25846 -2.29952 2.52634 0 0.451645 2.0002</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+  </world>
+</sdf>

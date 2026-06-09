@@ -1,0 +1,49 @@
+# ROS 2 / colcon build artifacts
+build/
+install/
+log/
+src/build/
+src/install/
+src/log/
+
+# Python cache / virtual env
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.venv/
+venv/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local VCS metadata from vendored repos
+src/.git/
+src/realsense-ros/.git/
+src/arcs_ros2-ros2/.git/
+
+# Training logs / checkpoints
+logs_skrl_gazebo/
+src/pipetbot_ppo/
+*.pt
+*.pth
+*.ckpt
+events.out.tfevents.*
+
+# Dataset and large generated assets
+dataset/
+*.bag
+*.db3
+*.mcap
+
+# Runtime / temp files
+*.log
+*.tmp
+*.temp
+

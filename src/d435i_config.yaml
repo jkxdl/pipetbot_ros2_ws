@@ -1,0 +1,9 @@
+enable_color: true
+rgb_camera.profile: "1280x720x15"   # 分辨率: 1280x720, 帧率: 15 FPS
+enable_depth: true
+depth_module.profile: "1280x720x15" # 或者根据设备支持的配置，设置深度流分辨率和帧率
+align_depth.enable: true
+enable_sync: true
+publish_tf: true
+tf_publish_rate: 1.0
+

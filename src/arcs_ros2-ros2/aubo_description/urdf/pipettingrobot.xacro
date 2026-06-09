@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro"
+       xmlns:controller="http://ros2_control"
+       name="pipetting_robot">
+
+  <!-- 引入宏定义 -->
+  <xacro:include filename="$(find aubo_description)/urdf/pipetting_robot.xacro"/>
+
+  <!-- 实例化宏：给出所有必需的命名参数 + origin 块 -->
+  <xacro:aubo_robot
+    name="pipetting_robot"
+    aubo_type="pipetting_robot"
+    tf_prefix=""
+    parent=""
+    generate_ros2_control_tag="true"
+    transmission_hw_interface="hardware_interface/PositionJointInterface"
+    use_fake_hardware="false"
+    fake_sensor_commands="false"
+    sim_gazebo="true"
+    sim_ignition="false"
+    rtu_device_name="/dev/ttyS7,115200,N,8,1"
+    initial_positions="${dict(
+      shoulder_joint=0.0,
+      upperArm_joint=-0.26179,
+      foreArm_joint=1.74532,
+      wrist1_joint=0.436,
+      wrist2_joint=1.57,
+      wrist3_joint=0.0
+    )}"
+    robot_ip="127.0.0.1"
+  >
+    <!-- “位置参数” *origin 需要一个 origin 块 -->
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:aubo_robot>
+  <!-- 显式加载 Gazebo ROS2 Control 插件 -->
+  
+
+</robot>

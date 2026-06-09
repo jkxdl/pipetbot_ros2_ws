@@ -1,0 +1,514 @@
+<sdf version='1.7'>
+  <model name='pipetting_robot'>
+    <joint name='world_to_support' type='fixed'>
+      <pose relative_to='__model__'>0 -0.3 0 0 -0 0</pose>
+      <parent>world</parent>
+      <child>support_link</child>
+    </joint>
+    <link name='support_link'>
+      <pose relative_to='world_to_support'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>7e-06 7.2e-05 0.500868 0 -0 0</pose>
+        <mass>26.539</mass>
+        <inertia>
+          <ixx>2.2263</ixx>
+          <ixy>-1.23359e-06</ixy>
+          <ixz>-9.24863e-05</ixz>
+          <iyy>2.22604</iyy>
+          <iyz>-0.000933786</iyz>
+          <izz>0.0370933</izz>
+        </inertia>
+      </inertial>
+      <collision name='support_link_collision'>
+        <pose>0 0 0.4725 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.945</length>
+            <radius>0.1</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name='support_link_fixed_joint_lump__base_collision_collision_1'>
+        <pose>0 0 0.945 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link0.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='support_link_visual'>
+        <pose>0 0 0.4725 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.945</length>
+            <radius>0.1</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      <visual name='support_link_fixed_joint_lump__base_link_visual_1'>
+        <pose>0 0 0.945 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link0.DAE</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <sensor name='base_contact_sensor' type='contact'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+          <collision>base_link::base_collision</collision>
+          <topic>__default_topic__</topic>
+        </contact>
+        <plugin name='base_bumper_plugin' filename='libgazebo_ros_bumper.so'>
+          <ros>
+            <namespace>/pipetting_robot</namespace>
+            <remapping>bumper_states:=base_contact</remapping>
+          </ros>
+          <frame_name>base_link</frame_name>
+        </plugin>
+        <pose>0 0 0.945 0 -0 0</pose>
+      </sensor>
+    </link>
+    <joint name='shoulder_joint' type='revolute'>
+      <pose relative_to='support_link'>0 0 1.067 0 -0 3.14159</pose>
+      <parent>support_link</parent>
+      <child>shoulder_Link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-6.28319</lower>
+          <upper>6.28319</upper>
+          <effort>500</effort>
+          <velocity>2.5964</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='shoulder_Link'>
+      <pose relative_to='shoulder_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-1e-05 0.001807 -0.013854 0 -0 0</pose>
+        <mass>4.84858</mass>
+        <inertia>
+          <ixx>0.011842</ixx>
+          <ixy>0</ixy>
+          <ixz>4e-06</ixz>
+          <iyy>0.0118</iyy>
+          <iyz>-0.000103</iyz>
+          <izz>0.008103</izz>
+        </inertia>
+      </inertial>
+      <collision name='shoulder_Link_fixed_joint_lump__shoulder_collision_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link1.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='shoulder_Link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link1.DAE</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <sensor name='shoulder_contact_sensor' type='contact'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+          <collision>shoulder_Link::shoulder_collision</collision>
+          <topic>__default_topic__</topic>
+        </contact>
+        <plugin name='shoulder_bumper_plugin' filename='libgazebo_ros_bumper.so'>
+          <ros>
+            <namespace>/pipetting_robot</namespace>
+            <remapping>bumper_states:=shoulder_contact</remapping>
+          </ros>
+          <frame_name>shoulder_Link</frame_name>
+        </plugin>
+      </sensor>
+    </link>
+    <joint name='upperArm_joint' type='revolute'>
+      <pose relative_to='shoulder_Link'>0 0.1215 0 -1.5708 -1.5708 0</pose>
+      <parent>shoulder_Link</parent>
+      <child>upperArm_Link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-6.28319</lower>
+          <upper>6.28319</upper>
+          <effort>133</effort>
+          <velocity>2.5964</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='upperArm_Link'>
+      <pose relative_to='upperArm_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.204 0 0.006603 0 -0 0</pose>
+        <mass>10.8363</mass>
+        <inertia>
+          <ixx>0.026024</ixx>
+          <ixy>2e-05</ixy>
+          <ixz>0</ixz>
+          <iyy>0.432805</iyy>
+          <iyz>0</iyz>
+          <izz>0.425155</izz>
+        </inertia>
+      </inertial>
+      <collision name='upperArm_Link_fixed_joint_lump__upperArm_collision_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link2.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='upperArm_Link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link2.DAE</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <sensor name='upperArm_contact_sensor' type='contact'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+          <collision>pipetting_robot::upperArm_Link::upperArm_collision</collision>
+          <topic>__default_topic__</topic>
+        </contact>
+        <plugin name='upperArm_bumper_plugin' filename='libgazebo_ros_bumper.so'>
+          <ros>
+            <namespace>/pipetting_robot</namespace>
+            <remapping>bumper_states:=upperArm_contact</remapping>
+          </ros>
+          <frame_name>upperArm_Link</frame_name>
+        </plugin>
+      </sensor>
+    </link>
+    <joint name='foreArm_joint' type='revolute'>
+      <pose relative_to='upperArm_Link'>0.408 0 0 -3.14159 0 0</pose>
+      <parent>upperArm_Link</parent>
+      <child>foreArm_Link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-6.28319</lower>
+          <upper>6.28319</upper>
+          <effort>133</effort>
+          <velocity>2.5964</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='foreArm_Link'>
+      <pose relative_to='foreArm_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.264626 -2e-05 0.093611 0 -0 0</pose>
+        <mass>2.84917</mass>
+        <inertia>
+          <ixx>0.003634</ixx>
+          <ixy>7e-06</ixy>
+          <ixz>0.000168</ixz>
+          <iyy>0.065327</iyy>
+          <iyz>2e-06</iyz>
+          <izz>0.064676</izz>
+        </inertia>
+      </inertial>
+      <collision name='foreArm_Link_fixed_joint_lump__foreArm_collision_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link3.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='foreArm_Link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link3.DAE</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <sensor name='foreArm_contact_sensor' type='contact'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+          <collision>pipetting_robot::foreArm_Link::foreArm_collision</collision>
+          <topic>__default_topic__</topic>
+        </contact>
+        <plugin name='foreArm_bumper_plugin' filename='libgazebo_ros_bumper.so'>
+          <ros>
+            <namespace>/pipetting_robot</namespace>
+            <remapping>bumper_states:=foreArm_contact</remapping>
+          </ros>
+          <frame_name>foreArm_Link</frame_name>
+        </plugin>
+      </sensor>
+    </link>
+    <joint name='wrist1_joint' type='revolute'>
+      <pose relative_to='foreArm_Link'>0.376 0 0 3.14159 -0 1.5708</pose>
+      <parent>foreArm_Link</parent>
+      <child>wrist1_Link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-6.28319</lower>
+          <upper>6.28319</upper>
+          <effort>13.5</effort>
+          <velocity>3.1105</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='wrist1_Link'>
+      <pose relative_to='wrist1_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>3.8e-05 0.011278 -0.001539 0 -0 0</pose>
+        <mass>1.62802</mass>
+        <inertia>
+          <ixx>0.001951</ixx>
+          <ixy>3e-06</ixy>
+          <ixz>1e-06</ixz>
+          <iyy>0.001154</iyy>
+          <iyz>-4.2e-05</iyz>
+          <izz>0.001931</izz>
+        </inertia>
+      </inertial>
+      <collision name='wrist1_Link_fixed_joint_lump__wrist1_collision_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link4.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='wrist1_Link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link4.DAE</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <sensor name='wrist1_contact_sensor' type='contact'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+          <collision>pipetting_robot::wrist1_Link::wrist1_collision</collision>
+          <topic>__default_topic__</topic>
+        </contact>
+        <plugin name='wrist1_bumper_plugin' filename='libgazebo_ros_bumper.so'>
+          <ros>
+            <namespace>/pipetting_robot</namespace>
+            <remapping>bumper_states:=wrist1_contact</remapping>
+          </ros>
+          <frame_name>wrist1_Link</frame_name>
+        </plugin>
+      </sensor>
+    </link>
+    <joint name='wrist2_joint' type='revolute'>
+      <pose relative_to='wrist1_Link'>0 0.1025 0 -1.5708 0 0</pose>
+      <parent>wrist1_Link</parent>
+      <child>wrist2_Link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-6.28319</lower>
+          <upper>6.28319</upper>
+          <effort>13.5</effort>
+          <velocity>3.1105</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='wrist2_Link'>
+      <pose relative_to='wrist2_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-3.8e-05 -0.011278 -0.001539 0 -0 0</pose>
+        <mass>1.62802</mass>
+        <inertia>
+          <ixx>0.001951</ixx>
+          <ixy>3e-06</ixy>
+          <ixz>-1e-06</ixz>
+          <iyy>0.001154</iyy>
+          <iyz>4.2e-05</iyz>
+          <izz>0.001931</izz>
+        </inertia>
+      </inertial>
+      <collision name='wrist2_Link_fixed_joint_lump__wrist2_collision_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link5.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='wrist2_Link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link5.DAE</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <sensor name='wrist2_contact_sensor' type='contact'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+          <collision>pipetting_robot::wrist2_Link::wrist2_collision</collision>
+          <topic>__default_topic__</topic>
+        </contact>
+        <plugin name='wrist2_bumper_plugin' filename='libgazebo_ros_bumper.so'>
+          <ros>
+            <namespace>/pipetting_robot</namespace>
+            <remapping>bumper_states:=wrist2_contact</remapping>
+          </ros>
+          <frame_name>wrist2_Link</frame_name>
+        </plugin>
+      </sensor>
+    </link>
+    <joint name='wrist3_joint' type='revolute'>
+      <pose relative_to='wrist2_Link'>0 -0.094 0 1.5708 -0 0</pose>
+      <parent>wrist2_Link</parent>
+      <child>wrist3_Link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-6.28319</lower>
+          <upper>6.28319</upper>
+          <effort>13.5</effort>
+          <velocity>3.1105</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='wrist3_Link'>
+      <pose relative_to='wrist3_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>6e-06 -0.169936 0.071111 0 -0 0</pose>
+        <mass>0.6978</mass>
+        <inertia>
+          <ixx>0.110293</ixx>
+          <ixy>-0.100001</ixy>
+          <ixz>-0.0999996</ixz>
+          <iyy>0.102259</iyy>
+          <iyz>0.104153</iyz>
+          <izz>0.108212</izz>
+        </inertia>
+      </inertial>
+      <collision name='wrist3_Link_fixed_joint_lump__wrist3_collision_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/collision/link6.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='wrist3_Link_fixed_joint_lump__tool0_collision_collision_1'>
+        <pose>0 -0.2374 0.106 1.5708 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/thirdparts/pipettor_link.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='wrist3_Link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/pipetting_robot/visual/link6.DAE</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='wrist3_Link_fixed_joint_lump__tool0_visual_1'>
+        <pose>0 -0.2374 0.106 1.5708 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/home/robot/pipetbot_ros2_ws/install/pipettingrobot_sim/share/pipettingrobot_sim/meshes/thirdparts/pipettor_link.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <sensor name='wrist3_contact_sensor' type='contact'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+          <collision>pipetting_robot::wrist3_Link::wrist3_collision</collision>
+          <topic>__default_topic__</topic>
+        </contact>
+        <plugin name='wrist3_bumper_plugin' filename='libgazebo_ros_bumper.so'>
+          <ros>
+            <namespace>/pipetting_robot</namespace>
+            <remapping>bumper_states:=wrist3_contact</remapping>
+          </ros>
+          <frame_name>wrist3_Link</frame_name>
+        </plugin>
+      </sensor>
+      <sensor name='tool0_contact_sensor' type='contact'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+          <collision>pipetting_robot::tool0::tool0_collision</collision>
+          <topic>__default_topic__</topic>
+        </contact>
+        <plugin name='tool0_bumper_plugin' filename='libgazebo_ros_bumper.so'>
+          <ros>
+            <namespace>/pipetting_robot</namespace>
+            <remapping>bumper_states:=tool0_contact</remapping>
+          </ros>
+          <frame_name>tool0</frame_name>
+        </plugin>
+        <pose>0 0 0.002 0 -0 0</pose>
+      </sensor>
+    </link>
+  </model>
+</sdf>

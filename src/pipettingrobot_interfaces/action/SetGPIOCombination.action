@@ -1,0 +1,12 @@
+# SetGPIOCombination.action
+
+# 请求部分（Goal）
+int32 combination_id
+---
+# 响应部分（Result）
+bool success
+string message
+---
+# 反馈部分（Feedback）
+string feedback_message
+

@@ -1,0 +1,7 @@
+int32 tube_index
+bool filled
+float32 fill_ratio
+---
+bool success
+string message
+

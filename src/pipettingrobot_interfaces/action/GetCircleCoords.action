@@ -1,0 +1,13 @@
+# Goal definition
+int32 circle_id
+
+---
+# Result definition
+bool success
+geometry_msgs/Point[] coordinates
+string message
+
+---
+# Feedback definition
+string status
+

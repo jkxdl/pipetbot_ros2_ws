@@ -1,0 +1,6 @@
+int32 expected_circle_count
+bool reset_visual_state
+string planning_method
+---
+bool success
+string message

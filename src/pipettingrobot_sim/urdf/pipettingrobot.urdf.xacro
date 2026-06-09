@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="pipetting_robot">
+    <xacro:arg name="initial_positions_file" default="$(find pipettingrobot_sim)/config/initial_positions.yaml" />
+
+    <!-- Import pipetting robot urdf file -->
+    <xacro:include filename="$(find pipettingrobot_sim)/urdf/pipettingrobot_C5.urdf.xacro" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="$(find pipettingrobot_sim)/urdf/pipetting.ros2_control.xacro" />
+
+    <xacro:pipettingrobot_ros2_control name="pipettingrobot_ros2_control" initial_positions_file="$(arg initial_positions_file)"/>
+
+</robot>

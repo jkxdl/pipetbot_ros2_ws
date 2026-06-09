@@ -1,0 +1,9 @@
+# SetJointAngles.srv
+
+# 请求部分
+float64[] joint_angles
+---
+# 响应部分
+bool success
+string message
+

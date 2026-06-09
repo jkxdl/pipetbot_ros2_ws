@@ -1,0 +1,14 @@
+static_transform_publisher:
+  transform:
+    translation:
+      x: -0.02946836
+      y: 0.59097235
+      z: 0.30800321
+    rotation:
+      x: -0.44038028237680465
+      y: 0.5790060486332264
+      z: -0.5731426660005116
+      w: 0.3772594424924177
+  frame_id: base_link
+  child_frame_id: camera_link
+

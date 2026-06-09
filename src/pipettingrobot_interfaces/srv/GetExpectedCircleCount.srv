@@ -1,0 +1,10 @@
+# GetExpectedCircleCount.srv
+
+# Request
+---
+
+# Response
+int32 expected_circle_count
+bool success
+string message
+
