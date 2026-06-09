@@ -42,8 +42,27 @@ dataset/
 *.db3
 *.mcap
 
+# Keep specific YOLO weights / configs tracked
+!src/yolo11n.pt
+!src/yolo11n-seg.pt
+!yolo11n-seg.pt
+!third_party/
+!third_party/ultralytics_yolo11_custom/
+!third_party/ultralytics_yolo11_custom/**
+!dataset/
+dataset/*
+!dataset/runs/
+dataset/runs/*
+!dataset/runs/train/
+dataset/runs/train/*
+!dataset/runs/train/yolov11n_experiment/
+dataset/runs/train/yolov11n_experiment/*
+!dataset/runs/train/yolov11n_experiment/args.yaml
+!dataset/runs/train/yolov11n_experiment/weights/
+dataset/runs/train/yolov11n_experiment/weights/*
+!dataset/runs/train/yolov11n_experiment/weights/best.pt
+
 # Runtime / temp files
 *.log
 *.tmp
 *.temp
-

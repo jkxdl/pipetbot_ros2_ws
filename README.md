@@ -20,6 +20,34 @@
 - 基于 Gymnasium + skrl 的 ROS 2 强化学习训练环境
 - 可扩展到码垛、抓取、分拣等其他类似机械臂任务
 
+## 基于 YOLO11 的改进模型说明
+
+本项目中的目标检测与部分障碍物感知能力，基于原始 `YOLO11` 结构进行了定制化改进，而不是只直接使用官方默认配置。
+
+目前已整理并收回到本仓库中的 YOLO11 改进内容包括：
+
+- 自定义模型结构 YAML
+  - 位于 [third_party/ultralytics_yolo11_custom/cfg/models/11](/home/robot/pipetbot_ros2_ws/third_party/ultralytics_yolo11_custom/cfg/models/11)
+- 自定义模块源码
+  - 位于 [third_party/ultralytics_yolo11_custom/nn/MyModules](/home/robot/pipetbot_ros2_ws/third_party/ultralytics_yolo11_custom/nn/MyModules)
+
+其中包含的改进方向包括：
+
+- `HSFPN`
+- `DynamicConv`
+- `CBFuse`
+- `RFAConv`
+- `C3k2_DynamicConv`
+- 以及这些模块的组合结构
+
+这部分文件最初位于本机安装的 `ultralytics` 库中，现已同步到当前仓库，便于：
+
+- 保留实验可复现性
+- 与训练权重对应
+- 避免仓库运行依赖“本机私有修改过的 site-packages”
+
+如果你需要复现实验或继续训练，建议优先参考这些本地归档的配置，而不是仅依赖系统中已安装的 `ultralytics` 默认模型目录。
+
 ## 强化学习说明
 
 本仓库中的强化学习相关内容分为两个层次：
@@ -71,7 +99,7 @@
 - `effector_controller`
   - 末端执行器 GPIO 组合控制
 - `target_detection`
-  - 基于 YOLOv11 的目标检测，结合 RealSense RGB/Depth 输出目标三维坐标
+  - 基于改进版 YOLO11 的目标检测，结合 RealSense RGB/Depth 输出目标三维坐标
 - `circle_detection`
   - 双目图像中的圆孔/试管位检测、排序与深度估计
 - `obstacle_detection`
@@ -110,7 +138,7 @@
   - 进行圆检测、匹配与期望圆位输出
 - `obstacle_detection/ObsaclePointSeg_yolo11_pub.py`
   - 对图像和点云做时间同步
-  - 分割障碍物并投影为障碍特征向量
+  - 基于改进版 YOLO11 分割障碍物并投影为障碍特征向量
 
 ### 2. 控制与任务执行
 
@@ -343,6 +371,22 @@ pip install -e ".[dev]"
 - 标注格式说明
 - 训练/验证/测试划分
 - 版本号或更新时间
+
+## 权重文件
+
+为了兼顾仓库可用性与体积控制，当前仓库计划只保留少量关键 YOLO 权重与配置示例，而不上传完整训练数据和全部实验产物。
+
+当前建议保留的代表性文件包括：
+
+- 基础或通用权重
+  - [src/yolo11n.pt](/home/robot/pipetbot_ros2_ws/src/yolo11n.pt)
+  - [src/yolo11n-seg.pt](/home/robot/pipetbot_ros2_ws/src/yolo11n-seg.pt)
+- 当前项目中直接使用的检测权重
+  - [dataset/runs/train/yolov11n_experiment/weights/best.pt](/home/robot/pipetbot_ros2_ws/dataset/runs/train/yolov11n_experiment/weights/best.pt)
+- 对应训练参数记录
+  - [dataset/runs/train/yolov11n_experiment/args.yaml](/home/robot/pipetbot_ros2_ws/dataset/runs/train/yolov11n_experiment/args.yaml)
+
+如果后续你把更多权重统一发布到 Hugging Face，也建议在这里补充下载链接。
 
 ### 5. 编译 ROS 2 工作区
 
