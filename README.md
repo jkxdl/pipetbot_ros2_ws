@@ -1,12 +1,11 @@
 # PipetBot ROS 2 Workspace
 
-一个面向移液机器人实验流程的 ROS 2 工作区，集成了机械臂控制、末端执行器控制、视觉检测、眼手标定、Gazebo 仿真、操作界面，以及基于强化学习的轨迹训练与避障实验。
+一个面向移液机器人实验流程的 ROS 2 工作区，集成了机械臂控制、末端执行器控制、视觉检测、眼手标定、Gazebo 强化学习训练、操作界面。
 
 虽然当前仓库以移液任务为核心场景，但整体架构并不局限于移液本身。其感知、运动规划、末端控制、GUI、仿真和强化学习训练模块也可以迁移到其他相似的机械臂任务中，例如码垛、抓取、分拣、定位放置、障碍环境下的轨迹执行等。对于这类任务，通常只需要替换目标检测模型、任务流程逻辑、末端执行器定义，以及少量场景参数或接口配置。
 
 需要说明的是，本仓库中的 `rl_train` 并不是整个强化学习体系的唯一来源。作者还维护了一个基于 Isaac Sim 的强化学习项目，用于训练机械臂的动态避障和 reach 能力；而当前仓库中的 `rl_train` 主要用于在 Gazebo / ROS 2 环境中做策略验证、任务适配和微调。
 
-该仓库当前更接近“研究/实验型工作区”而不是单一 Python 包。目录中除了自研包，还包含了第三方 ROS 2 依赖源码、训练日志、模型权重和数据集。因此，在上传 GitHub 前，建议配合 `.gitignore` 进一步筛掉 `build/`、`install/`、`log/`、训练日志和大体积数据文件。
 
 ## 项目能力概览
 
@@ -359,18 +358,7 @@ pip install -e ".[dev]"
 
 ## 数据集
 
-仓库中的 `dataset/` 目录默认不随 GitHub 一起上传，以避免仓库体积过大，也方便后续独立管理数据版本。
-
-后续可从 Hugging Face 下载数据集：
-
-- Hugging Face Dataset: `TODO: https://huggingface.co/datasets/<your-dataset-name>`
-
-建议你后续发布数据集时，在这里替换成真实链接，并补充：
-
-- 数据集内容简介
-- 标注格式说明
-- 训练/验证/测试划分
-- 版本号或更新时间
+后续开源
 
 ## 权重文件
 
@@ -386,7 +374,6 @@ pip install -e ".[dev]"
 - 对应训练参数记录
   - [dataset/runs/train/yolov11n_experiment/args.yaml](/home/robot/pipetbot_ros2_ws/dataset/runs/train/yolov11n_experiment/args.yaml)
 
-如果后续你把更多权重统一发布到 Hugging Face，也建议在这里补充下载链接。
 
 ### 5. 编译 ROS 2 工作区
 
@@ -421,7 +408,6 @@ colcon build --symlink-install --packages-select \
 
 ```bash
 ros2 pkg list | grep pipettingrobot
-ros2 pkg list | grep rl_train
 ```
 
 再尝试启动仿真或 GUI：
@@ -435,6 +421,62 @@ ros2 launch pipettingrobot_launch pipettingrobot_sim.launch.py
 ```bash
 ros2 launch pipettingrobot_gui pipetting_operator.launch.py
 ```
+
+## 硬件准备与机器人连接
+
+如果你要运行真实机器人而不是纯仿真，在执行启动命令前，建议先完成以下准备：
+
+### 1. 硬件准备
+
+- 机械臂本体已上电并处于可通信状态
+- 末端执行器已安装并完成接线
+- RealSense 相机与双目相机连接正常
+- 工控机或工作站与机器人控制器处于同一网段
+- 标定文件、场景模型和目标参数已准备完成
+
+末端执行器的机电设计仓库可在这里补充：
+
+- End-effector design repository: `TODO: https://github.com/<your-org>/<your-end-effector-repo>`
+
+### 2. 设置机器人 IP
+
+当前主启动文件支持通过 `robot_ip` 传入机器人控制器地址。在启动实机系统前，请先确认：
+
+- 机器人控制器 IP
+- 本机网卡 IP
+- 二者网络可互通
+
+例如：
+
+```bash
+ping 192.168.1.200
+```
+
+启动时可显式指定机器人 IP：
+
+```bash
+ros2 launch pipettingrobot_launch pipettingrobot_launch.launch.py \
+  robot_ip:=192.168.1.200
+```
+
+如果还需要指定机器人型号或其他参数，也可以一起传入：
+
+```bash
+ros2 launch pipettingrobot_launch pipettingrobot_launch.launch.py \
+  robot_ip:=192.168.1.200 \
+  aubo_type:=aubo_C5
+```
+
+### 3. 先确认通信再启动整套系统
+
+建议顺序：
+
+1. 检查网络连通
+2. 确认机械臂和末端执行器状态正常
+3. 确认相机设备已识别
+4. 再执行完整 launch
+
+这样可以避免把通信、硬件和软件问题混在一起排查。
 
 ## 构建
 

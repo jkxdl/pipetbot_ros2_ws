@@ -6,6 +6,7 @@ from ultralytics import YOLO
 import cv2
 import numpy as np
 import sensor_msgs_py.point_cloud2 as pc2
+from yolo11_custom import create_yolo_model
 
 
 class YoloPointCloudNode(Node):
@@ -33,7 +34,7 @@ class YoloPointCloudNode(Node):
         self.pointcloud = None
         self.pointcloud_width = None
         self.pointcloud_received = False
-        self.model = YOLO('yolo11n.pt')  # 加载YOLO模型
+        self.model = create_yolo_model('yolo11n.pt')  # 加载YOLO模型
 
         self.get_logger().info("YOLO PointCloud Node has been started.")
 
@@ -173,4 +174,3 @@ def main(args=None):
         node.destroy_node()
         rclpy.shutdown()
         cv2.destroyAllWindows()
-

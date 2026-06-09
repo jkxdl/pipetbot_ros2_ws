@@ -8,6 +8,7 @@ import numpy as np
 from geometry_msgs.msg import Point
 from threading import Lock
 import threading
+from yolo11_custom import create_yolo_model
 
 # 导入自定义服务和消息
 from pipettingrobot_interfaces.srv import GetDetections
@@ -19,7 +20,9 @@ class Yolov11_d435i(Node):
 
         # 初始化 CvBridge 和 YOLO 模型
         self.bridge = CvBridge()
-        self.model = YOLO('/home/robot/pipetbot_ros2_ws/dataset/runs/train/yolov11n_experiment/weights/best.pt')
+        self.model = create_yolo_model(
+            '/home/robot/pipetbot_ros2_ws/dataset/runs/train/yolov11n_experiment/weights/best.pt'
+        )
         self.latest_rgb_image = None
         self.latest_depth_image = None
 

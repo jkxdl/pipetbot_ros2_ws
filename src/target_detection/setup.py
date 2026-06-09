@@ -6,6 +6,9 @@ setup(
     name=package_name,
     version='0.0.0',
     packages=find_packages(exclude=['test']),
+    package_data={
+        'yolo11_custom': ['cfg/models/11/*.yaml'],
+    },
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),

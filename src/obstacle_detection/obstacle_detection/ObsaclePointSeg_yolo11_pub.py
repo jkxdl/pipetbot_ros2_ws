@@ -4,6 +4,8 @@ import numpy as np
 import math
 import torch
 import cv2
+import sys
+from pathlib import Path
 from rclpy.duration import Duration
 
 # ROS2 核心
@@ -22,6 +24,12 @@ from geometry_msgs.msg import PointStamped
 
 # AI 与 图像处理
 from ultralytics import YOLO
+
+TARGET_DETECTION_SRC = Path(__file__).resolve().parents[2] / "target_detection"
+if str(TARGET_DETECTION_SRC) not in sys.path:
+    sys.path.insert(0, str(TARGET_DETECTION_SRC))
+
+from yolo11_custom import create_yolo_model
 
 class YOLOObstacleFeatureNode(Node):
     def __init__(self):
@@ -48,7 +56,7 @@ class YOLOObstacleFeatureNode(Node):
         self.tf_buffer = tf2_ros.Buffer()
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
         self.bridge = CvBridge()
-        self.model = YOLO("yolo11n-seg.pt") 
+        self.model = create_yolo_model("yolo11n-seg.pt")
         
         # 生成斐波那契射线（障碍物特征提取用）
         self.rays_np = self._make_fibonacci_rays_quarter(self.ray_count, self.plane)

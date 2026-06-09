@@ -5,6 +5,7 @@ from cv_bridge import CvBridge
 from ultralytics import YOLO
 import cv2
 import numpy as np
+from yolo11_custom import create_yolo_model
 
 class YoloStereo3DNode(Node):
     def __init__(self):
@@ -21,7 +22,7 @@ class YoloStereo3DNode(Node):
         
         # 初始化变量
         self.bridge = CvBridge()
-        self.model = YOLO('yolo11n.pt')  # 加载YOLO模型
+        self.model = create_yolo_model('yolo11n.pt')  # 加载YOLO模型
         self.left_image = None
         self.right_image = None
         
@@ -148,4 +149,3 @@ def main(args=None):
         node.destroy_node()
         rclpy.shutdown()
         cv2.destroyAllWindows()
-
